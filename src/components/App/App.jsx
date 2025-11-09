@@ -18,12 +18,24 @@ function App() {
   function handleOpenAddGarmentModal(card) {
     setActiveModal("add-garment-modal");
   }
+
+  function handleCloseItemModal(card) {
+    setActiveModal("");
+  }
+
+  function handleCloseAddGarmentModal(card) {
+    setActiveModal("");
+  }
   return (
     <div className="app">
-      <Header handleOpenAddGarmentModal={handleOpenAddGarmentModal} />
+      <Header
+        handleOpenAddGarmentModal={handleOpenAddGarmentModal}
+        handleCloseAddGarmentModal={handleCloseAddGarmentModal}
+      />
       <Main
         clothingItems={clothingItems}
         handleOpenItemModal={handleOpenItemModal}
+        handleCloseItemModal={handleCloseItemModal}
       />
       <Footer />
       <ItemModal card={selectedCard} isOpen={activeModal === "item-modal"} />
