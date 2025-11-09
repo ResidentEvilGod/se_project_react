@@ -54,4 +54,15 @@
 }
 
 .modal__title {
+  margin: 0;
+}
+
+.modal__input {
+  display: block;
+}
+
+.modal__fieldset {
+  margin: 0;
+  padding: 0;
+  border: none;
 }

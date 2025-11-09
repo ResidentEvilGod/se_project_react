@@ -5,10 +5,18 @@ function ItemCard({ data, onCardClick }) {
     onCardClick(data);
   }
 
+  function handleOpenCard() {
+    onCardClick(data);
+  }
   return (
     <li className="card">
       <h2 className="card__title">{data.name}</h2>
-      <img src={data.link} alt={data.name} className="card__image" />
+      <img
+        src={data.link}
+        alt={data.name}
+        className="card__image"
+        onClick={handleOpenCard}
+      />
     </li>
   );
 }
