@@ -11,12 +11,10 @@ function Header({ handleOpenAddGarmentModal }) {
   return (
     <header className="header">
       <img src={logo} alt="WTWR logo" className="header__logo" />
-      <p className="header__place">
-        , New York
-        <time className="header__dateTime" datetime={now}>
-          {dateStr}
-        </time>
-      </p>
+      <time className="header__dateTime" datetime={now}>
+        {dateStr}
+      </time>
+      <p className="header__place">, New York</p>
 
       <button
         onClick={handleOpenAddGarmentModal}
