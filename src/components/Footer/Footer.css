@@ -1,0 +1,9 @@
+.footer {
+  font-family: Cabinet Grotessk, sans-serif;
+  font-weight: 500;
+  display: block;
+  margin: 0;
+  padding: 0;
+  font-size: 16px;
+  color: rgba(0, 0, 0, 1);
+}

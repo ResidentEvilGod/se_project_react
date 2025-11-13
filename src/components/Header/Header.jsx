@@ -11,7 +11,7 @@ function Header({ handleOpenAddGarmentModal }) {
   return (
     <header className="header">
       <img src={logo} alt="WTWR logo" className="header__logo" />
-      <time className="header__dateTime" datetime={now}>
+      <time className="header__dateTime" dateTime={now}>
         {dateStr}
       </time>
       <p className="header__place">, New York</p>

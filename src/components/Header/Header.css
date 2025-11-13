@@ -14,10 +14,16 @@
   font-size: 20px;
   line-height: 24px;
   color: rgba(0, 0, 0, 1);
+  padding-bottom: 10px;
+  gap: 20px;
 }
 
 .header__username {
   margin-right: 12px;
   font-family: Cabinet Grotesk, sans-serif;
   font-weight: 700;
+}
+
+.header__place {
+  margin: 20px;
 }
