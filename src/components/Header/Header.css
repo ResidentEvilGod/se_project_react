@@ -14,8 +14,6 @@
   font-size: 20px;
   line-height: 24px;
   color: rgba(0, 0, 0, 1);
-  padding-bottom: 10px;
-  gap: 20px;
   background: transparent;
   border: none;
 }
@@ -28,10 +26,10 @@
 }
 
 .header__place {
-  margin: 20px;
+  padding-top: 5px;
 }
 
 .header__dateTime {
-  margin: 0;
-  padding: 0;
+  margin-top: 21px;
+  margin-right: 3px;
 }

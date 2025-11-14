@@ -71,7 +71,7 @@ function App() {
               value="hot"
             />
             <label className="modal__label" htmlFor="hot">
-              Hot
+              Weather: Hot
             </label>
           </div>
 
@@ -84,7 +84,7 @@ function App() {
               value="warm"
             />
             <label className="modal__label" htmlFor="warm">
-              Warm
+              Weather: Warm
             </label>
           </div>
 
@@ -97,7 +97,7 @@ function App() {
               value="cold"
             />
             <label className="modal__label" htmlFor="cold">
-              Cold
+              Weather: Cold
             </label>
           </div>
         </fieldset>

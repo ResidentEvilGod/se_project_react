@@ -1,7 +1,14 @@
 import "./footer.css";
 
 function Footer() {
-  return <footer className="footer">Developed by Nicholas Amos 2025</footer>;
+  return (
+    <footer>
+      <div className="footer">
+        <span>Developed by Nicholas Amos</span>
+        <span>2025</span>
+      </div>
+    </footer>
+  );
 }
 
 export default Footer;

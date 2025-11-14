@@ -49,13 +49,17 @@
 
 .modal__footer {
   background-color: #fff;
-  margin-left: 32px;
   margin-bottom: 32px;
-  margin-top: 20px;
+  padding: 32px;
+  border-radius: 16px;
 }
 
 .modal__text {
   margin: 0;
+  font-family: Cabinet Grotesk, sans-serif;
+  font-weight: 700;
+  font-size: 20px;
+  color: rgba(0, 0, 0, 1);
 }
 
 .modal__title {
