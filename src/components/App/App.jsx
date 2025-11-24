@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import Header from "../Header/Header";
 import Main from "../Main/Main";
 import Footer from "../Footer/Footer";
@@ -6,6 +6,7 @@ import { defaultClothingItems } from "../../utils/defaultClothingItems";
 import "./App.css";
 import ItemModal from "../ItemModal/ItemModal";
 import ModalWithForm from "../ModalWithForm/ModalWithForm";
+import { getWeatherData } from "../../utils/weatherApi";
 
 function App() {
   const [clothingItems, setClothingItems] = useState(defaultClothingItems);
@@ -26,6 +27,14 @@ function App() {
   function handleCloseAddGarmentModal(card) {
     setActiveModal("");
   }
+
+  useEffect(() => {
+    getWeatherData()
+      .then((res) => {
+        console.log(data);
+      })
+      .catch(console.error);
+  }, []);
   return (
     <div className="app">
       <Header
