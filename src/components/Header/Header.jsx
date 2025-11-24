@@ -1,7 +1,7 @@
 import logo from "../../assets/logo.svg";
 import avatar from "../../assets/avatar.svg";
 import "./Header.css";
-function Header({ handleOpenAddGarmentModal }) {
+function Header({ handleOpenAddGarmentModal, weatherData }) {
   const now = new Date();
   const dateStr = now.toLocaleDateString("default", {
     month: "long",
@@ -14,7 +14,7 @@ function Header({ handleOpenAddGarmentModal }) {
       <time className="header__dateTime" dateTime={now}>
         {dateStr}
       </time>
-      <p className="header__place">, New York</p>
+      <p className="header__place">, {weatherData.city}</p>
 
       <button
         onClick={handleOpenAddGarmentModal}

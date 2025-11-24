@@ -12,6 +12,7 @@ function App() {
   const [clothingItems, setClothingItems] = useState(defaultClothingItems);
   const [activeModal, setActiveModal] = useState("");
   const [selectedCard, setSelectedCard] = useState({});
+  const [weatherData, setWeatherData] = useState({ name: "", temp: "0" });
   function handleOpenItemModal(card) {
     setActiveModal("item-modal");
     setSelectedCard(card);
@@ -30,18 +31,20 @@ function App() {
 
   useEffect(() => {
     getWeatherData()
-      .then((res) => {
-        console.log(data);
+      .then((data) => {
+        setWeatherData(data);
       })
       .catch(console.error);
   }, []);
   return (
     <div className="app">
       <Header
+        weatherData={weatherData}
         handleOpenAddGarmentModal={handleOpenAddGarmentModal}
         handleCloseAddGarmentModal={handleCloseAddGarmentModal}
       />
       <Main
+        weatherData={weatherData}
         clothingItems={clothingItems}
         handleOpenItemModal={handleOpenItemModal}
         handleCloseItemModal={handleCloseItemModal}
