@@ -1,3 +1,4 @@
+import "./ModalWithForm.css";
 function ModalWithForm({
   isOpen,
   children,
