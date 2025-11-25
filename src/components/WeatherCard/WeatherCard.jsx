@@ -7,16 +7,16 @@ import "./WeatherCard.css";
 
 function WeatherCard({ weatherData }) {
   const { currentTempUnit } = useContext(CurrentTemperatureUnitContext);
-
-  weatherConditionImages["day"]["clear"].image;
+  const weatherImageSrc = weatherData.isDay ? cloudyDay : cloudyNight;
+  const weatherImageAlt = weatherData.isDay
+    ? "Cloudy daytime"
+    : "Cloudy nighttime";
   return (
     <section className="weather-card">
       {currentTempUnit}
       <img
-        src={
-          weatherConditionImages["night"][weatherData.weatherCondition]?.image
-        }
-        alt="Cloudy weather"
+        src={weatherImageSrc}
+        alt={weatherImageAlt}
         className="weather-card__image"
       />
       <p className="weather-card__temp">

@@ -29,6 +29,10 @@ export const weatherConditionImages = {
     },
   },
   night: {
+    default: {
+      name: "default",
+      image: new URL("../assets/night/default.png", import.meta.url).href,
+    },
     clear: {
       name: "clear",
       image: new URL("../assets/night/clear.svg", import.meta.url).href,
