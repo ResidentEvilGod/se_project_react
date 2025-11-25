@@ -28,10 +28,23 @@
   z-index: -1;
 }
 
+.toggle-switch__checkbox:checked + .toggle-switch__circle {
+  right: -2px;
+  left: unset;
+}
+
 .toggle-switch__value {
   color: #7e7e7e;
   font-size: 14px;
   line-height: 1;
   font-weight: 700;
   font-family: Cabinet Grotesk, sans-serif;
+}
+
+.toggle-switch__checkbox:checked ~ .toggle-switch__value_right {
+  color: #fff;
+}
+
+.toggle-switch__checkbox:not(:checked) ~ .toggle-switch__value_left {
+  color: #fff;
 }
