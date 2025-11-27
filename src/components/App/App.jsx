@@ -22,7 +22,22 @@ function App() {
   function handleOpenAddGarmentModal(card) {
     setActiveModal("add-garment-modal");
   }
+  function handleAddGarmentSubmit(e) {
+    e.preventDefault();
+    const name = e.target["add-garment-name-input"].value;
+    const link = e.target["add-garment-image"].value;
+    const weather = e.target.weather.value;
 
+    const newItem = {
+      _id: Date.now(),
+      name,
+      link,
+      weather,
+    };
+
+    setClothingItems((items) => [newItem, ...items]);
+    setActiveModal("");
+  }
   function handleCloseItemModal(card) {
     setActiveModal("");
   }
@@ -71,30 +86,42 @@ function App() {
         <ItemModal card={selectedCard} isOpen={activeModal === "item-modal"} />
         <ModalWithForm
           isOpen={activeModal === "add-garment-modal"}
-          title={"New garment"}
-          buttonText={"Add garment"}
-          name={"add-garment-form"}
+          title="New garment"
+          buttonText="Add garment"
+          name="add-garment-form"
+          handleSubmit={handleAddGarmentSubmit}
+          onClose={handleCloseAddGarmentModal}
         >
           <fieldset className="modal__fieldset">
             <label htmlFor="add-garment-name-input" className="modal__label">
               Name
               <input
                 id="add-garment-name-input"
+                name="add-garment-name-input"
                 type="text"
                 className="modal__input"
+                required
               />
-              <label htmlFor="add-garment-image" className="modal__label">
-                Image
-                <input type="url" className="modal__input" />
-              </label>
+            </label>
+
+            <label htmlFor="add-garment-image" className="modal__label">
+              Image
+              <input
+                id="add-garment-image"
+                name="add-garment-image"
+                type="url"
+                className="modal__input"
+                required
+              />
             </label>
           </fieldset>
+
           <fieldset className="modal__fieldset">
             <legend>Select the weather type:</legend>
 
             <div>
               <input
-                className="modal__radio-btnt"
+                className="modal__radio-btn"
                 type="radio"
                 id="hot"
                 name="weather"

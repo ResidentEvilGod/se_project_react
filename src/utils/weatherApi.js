@@ -2,7 +2,7 @@ import { apiKey, coordinates } from "./constants";
 
 export function getWeatherData() {
   return fetch(
-    "https://api.openweathermap.org/data/2.5/weather?lat=${coordinates.lat}&lon=${coordinates.lon}&units=imperial&appid=${apiKey}"
+    `https://api.openweathermap.org/data/2.5/weather?lat=${coordinates.lat}&lon=${coordinates.lon}&units=imperial&appid=${apiKey}`
   )
     .then((res) => {
       return res.ok
