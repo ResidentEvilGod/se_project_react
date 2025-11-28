@@ -83,7 +83,11 @@ function App() {
           handleCloseItemModal={handleCloseItemModal}
         />
         <Footer />
-        <ItemModal card={selectedCard} isOpen={activeModal === "item-modal"} />
+        <ItemModal
+          card={selectedCard}
+          isOpen={activeModal === "item-modal"}
+          handleCloseItemModal={handleCloseItemModal}
+        />
         <ModalWithForm
           isOpen={activeModal === "add-garment-modal"}
           title="New garment"

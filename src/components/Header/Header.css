@@ -29,11 +29,6 @@
   font-size: 20px;
 }
 
-.header__place {
-  padding-top: 5px;
-}
-
 .header__dateTime {
-  margin-top: 21px;
   margin-right: 3px;
 }

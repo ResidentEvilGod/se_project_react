@@ -1,10 +1,14 @@
 import "./ItemModal.css";
 
-function ItemModal({ card, isOpen }) {
+function ItemModal({ card, isOpen, handleCloseItemModal }) {
   return (
     <div className={`modal ${isOpen ? "modal_is-opened" : ""}`}>
       <div className="modal__container">
-        <button type="button" className="modal__close-btn">
+        <button
+          type="button"
+          className="modal__close-btn"
+          onClick={handleCloseItemModal}
+        >
           X
         </button>
         <img src={card.link} alt={card.name} className="modal__image" />
