@@ -3,6 +3,10 @@ const apiKey = "230a179187730aa31b3c1a708e24fd13";
 
 export const weatherConditionImages = {
   day: {
+    default: {
+      name: "default",
+      image: new URL("../assets/day/default.svg", import.meta.url).href,
+    },
     clear: {
       name: "clear",
       image: new URL("../assets/day/clear.svg", import.meta.url).href,

@@ -1,0 +1,44 @@
+.modal__container {
+  width: 472px;
+  height: 193px;
+  background-color: rgba(255, 255, 255, 1);
+  border-radius: 20px;
+  border: 1px;
+  border-color: rgba(0, 0, 0, 0.3);
+}
+
+.modal__close-btn {
+  padding-top: 22px;
+  padding-right: 30px;
+  color: rgba(0, 0, 0, 0.3);
+}
+
+.modal__title {
+  font-family: Cabinet Grotesk, sans-serif;
+  font-weight: 700;
+  font-style: bold;
+  font-size: 16px;
+  padding-left: 28px;
+  padding-top: 28px;
+}
+
+.modal__form {
+  font-family: Cabinet Grtesk, sans-serif;
+  font-weight: 700;
+  font-style: bold;
+  font-size: 16px;
+}
+
+.modal__sumbit-btn {
+  padding-left: 28px;
+  padding-bottom: 36px;
+  color: rgba(0, 0, 0, 1);
+}
+
+.modal__sumbit-btn:hover {
+  color: rgba(0, 0, 0, 0.6);
+}
+
+.modal__sumbit-btn:disabled {
+  color: rgba(0, 0, 0, 0.3);
+}
