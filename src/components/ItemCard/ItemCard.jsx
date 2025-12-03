@@ -4,10 +4,6 @@ function ItemCard({ data, onCardClick }) {
   function handleOpenCard() {
     onCardClick(data);
   }
-
-  function handleOpenCard() {
-    onCardClick(data);
-  }
   return (
     <li className="card">
       <h2 className="card__title">{data.name}</h2>

@@ -45,7 +45,7 @@
   right: 24px;
   background-image: url(../../assets/Group199.svg);
   background-repeat: no-repeat;
-  background-color: none;
+  background-color: transparent;
   border: none;
 }
 
@@ -67,10 +67,6 @@
 
 .modal__title {
   margin: 0;
-}
-
-.modal__input {
-  display: block;
 }
 
 .modal__fieldset {

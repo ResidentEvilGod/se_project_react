@@ -1,4 +1,4 @@
-.modal__container {
+.modal__container_type_form {
   width: 472px;
   height: 193px;
   background-color: rgba(255, 255, 255, 1);
@@ -29,16 +29,20 @@
   font-size: 16px;
 }
 
-.modal__sumbit-btn {
+.modal__submit-btn {
   padding-left: 28px;
   padding-bottom: 36px;
   color: rgba(0, 0, 0, 1);
 }
 
-.modal__sumbit-btn:hover {
+.modal__submit-btn:hover {
   color: rgba(0, 0, 0, 0.6);
 }
 
-.modal__sumbit-btn:disabled {
+.modal__submit-btn:disabled {
   color: rgba(0, 0, 0, 0.3);
+}
+
+.modal__input {
+  display: block;
 }
