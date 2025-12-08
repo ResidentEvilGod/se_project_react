@@ -64,6 +64,12 @@ function App() {
       .catch(console.error);
   }
 
+  function handleDeleteItem(item) {
+    deleteItem(item._id)
+      .then(() => {})
+      .catch(console.error);
+  }
+
   useEffect(() => {
     getWeatherData()
       .then((data) => {
