@@ -8,6 +8,7 @@ import ItemModal from "../ItemModal/ItemModal";
 import ModalWithForm from "../ModalWithForm/ModalWithForm";
 import { getWeatherData } from "../../utils/weatherApi";
 import CurrentTemperatureUnitContext from "../../contexts/CurrentTemperatureUnitContext";
+import Profile from "../Profile/Profile";
 
 function App() {
   const [clothingItems, setClothingItems] = useState([]);
@@ -88,7 +89,10 @@ function App() {
               />
             }
           ></Route>
-          <Route path="/profile" element={<div></div>}></Route>
+          <Route
+            path="/profile"
+            element={<Profile clothingItems={clothingItems} />}
+          ></Route>
         </Routes>
         <Footer />
         <ItemModal
