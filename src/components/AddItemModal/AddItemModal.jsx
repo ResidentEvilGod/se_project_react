@@ -1,8 +1,16 @@
 import ModalWithForm from "../ModalWithForm/ModalWithForm";
 import { useForm } from "../../hooks/useForm";
 
-function AddItemModal({ isOpen }) {
-  const { values, handleChange } = useForm({ name: "", weather: "hot" });
+function AddItemModal({ isOpen, handleAddItemSubmit }) {
+  const { values, handleChange } = useForm({
+    name: "",
+    weather: "hot",
+    image: "",
+  });
+  const handleSubmit = (event) => {
+    event.preventDefault();
+    handleAddItemSubmit(values);
+  };
 
   return (
     <ModalWithForm
@@ -10,8 +18,7 @@ function AddItemModal({ isOpen }) {
       title="New garment"
       buttonText="Add garment"
       name="add-garment-form"
-      handleSubmit={handleAddGarmentSubmit}
-      onClose={handleCloseAddGarmentModal}
+      handleSubmit={handleSubmit}
     >
       <fieldset className="modal__fieldset">
         <label htmlFor="add-garment-name-input" className="modal__label">
@@ -26,13 +33,13 @@ function AddItemModal({ isOpen }) {
             required
           />
         </label>
-
         <label htmlFor="add-garment-image" className="modal__label">
           Image
           <input
             id="add-garment-image"
-            name="add-garment-image"
+            name="image"
             type="url"
+            value={values.image}
             className="modal__input"
             required
           />
