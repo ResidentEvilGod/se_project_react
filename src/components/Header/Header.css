@@ -32,3 +32,9 @@
 .header__dateTime {
   margin-right: 3px;
 }
+
+.header__link {
+  display: flex;
+  text-decoration: none;
+  color: #000;
+}
