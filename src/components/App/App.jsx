@@ -2,13 +2,14 @@ import { useEffect, useState } from "react";
 import Header from "../Header/Header";
 import Main from "../Main/Main";
 import Footer from "../Footer/Footer";
-import { defaultClothingItems } from "../../utils/defaultClothingItems";
+
 import "./App.css";
 import ItemModal from "../ItemModal/ItemModal";
 import { getWeatherData } from "../../utils/weatherApi";
 import CurrentTemperatureUnitContext from "../../contexts/CurrentTemperatureUnitContext";
 import Profile from "../Profile/Profile";
 import AddItemModal from "../AddItemModal/AddItemModal";
+import { getItems } from "../../utils/api";
 
 function App() {
   const [clothingItems, setClothingItems] = useState([]);
@@ -68,7 +69,11 @@ function App() {
   }, []);
 
   useEffect(() => {
-    setClothingItems(defaultClothingItems);
+    getItems()
+      .then((items) => {
+        setClothingItems(items);
+      })
+      .catch(console.error);
   }, []);
 
   return (
