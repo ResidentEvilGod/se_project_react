@@ -57,7 +57,11 @@ function App() {
   }
 
   function handleAddItemSubmit(inputValues) {
-    setClothingItems([inputValues, ...clothingItems]);
+    addItem(inputValues)
+      .then((data) => {
+        setClothingItems([data, ...clothingItems]);
+      })
+      .catch(console.error);
   }
 
   useEffect(() => {

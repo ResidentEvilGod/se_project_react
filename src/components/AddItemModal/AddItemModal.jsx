@@ -9,7 +9,7 @@ function AddItemModal({ isOpen, handleAddItemSubmit }) {
   });
   const handleSubmit = (event) => {
     event.preventDefault();
-    handleAddItemSubmit(values);
+    handleAddItemSubmit({ ...values, imageUrl: values.link });
   };
 
   return (
