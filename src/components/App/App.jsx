@@ -76,12 +76,20 @@ function App() {
           handleOpenAddGarmentModal={handleOpenAddGarmentModal}
           handleCloseAddGarmentModal={handleCloseAddGarmentModal}
         />
-        <Main
-          weatherData={weatherData}
-          clothingItems={clothingItems}
-          handleOpenItemModal={handleOpenItemModal}
-          handleCloseItemModal={handleCloseItemModal}
-        />
+        <Routes>
+          <Route
+            path="/"
+            element={
+              <Main
+                weatherData={weatherData}
+                clothingItems={clothingItems}
+                handleOpenItemModal={handleOpenItemModal}
+                handleCloseItemModal={handleCloseItemModal}
+              />
+            }
+          ></Route>
+          <Route path="/profile" element={<div></div>}></Route>
+        </Routes>
         <Footer />
         <ItemModal
           card={selectedCard}
