@@ -3,14 +3,18 @@ import "./ToggleSwitch.css";
 import CurrentTemperatureUnitContext from "../../contexts/CurrentTemperatureUnitContext";
 
 function ToggleSwitch() {
-  const { handleTempUnitChange } = useContext(CurrentTemperatureUnitContext);
+  const { currentTempUnit, handleTempUnitChange } = useContext(
+    CurrentTemperatureUnitContext
+  );
+
+  const isCelsius = currentTempUnit === "C";
 
   return (
-    <label htmlFor="toggle-switch" className="toggle-switch">
+    <label className="toggle-switch">
       <input
-        id="toggle-switch"
         type="checkbox"
         className="toggle-switch__checkbox"
+        checked={isCelsius}
         onChange={handleTempUnitChange}
       />
       <span className="toggle-switch__circle"></span>
