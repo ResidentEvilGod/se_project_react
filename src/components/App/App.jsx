@@ -9,13 +9,23 @@ import { getWeatherData } from "../../utils/weatherApi";
 import CurrentTemperatureUnitContext from "../../contexts/CurrentTemperatureUnitContext";
 import Profile from "../Profile/Profile";
 import AddItemModal from "../AddItemModal/AddItemModal";
-import { getItems } from "../../utils/api";
+import { getItems, addItem, deleteItem } from "../../utils/api";
 
 function App() {
+  const tempF = weatherData.temp.F;
+  const weatherType = getWeatherType(tempF);
+  const filteredItems = clothingItems.filter(
+    (item) => item.weather.toLowerCase() === weatherType
+  );
   const [clothingItems, setClothingItems] = useState([]);
   const [activeModal, setActiveModal] = useState("");
   const [selectedCard, setSelectedCard] = useState({});
-  const [weatherData, setWeatherData] = useState({ name: "", temp: "0" });
+  const [weatherData, setWeatherData] = useState({
+    city: "",
+    temp: { F: 0, C: 0 },
+    weatherCondition: "clear",
+    isDay: true,
+  });
   const [currentTempUnit, setCurrentTempUnit] = useState("F");
   function handleOpenItemModal(card) {
     setActiveModal("item-modal");
@@ -59,14 +69,19 @@ function App() {
   function handleAddItemSubmit(inputValues) {
     addItem(inputValues)
       .then((data) => {
-        setClothingItems([data, ...clothingItems]);
+        setClothingItems((clothingItems) => [data, ...clothingItems]);
+        setActiveModal("");
       })
       .catch(console.error);
   }
-
   function handleDeleteItem(item) {
     deleteItem(item._id)
-      .then(() => {})
+      .then(() => {
+        setClothingItems((prev) =>
+          prev.filter((clothingItem) => clothingItem._id !== item._id)
+        );
+        setActiveModal("");
+      })
       .catch(console.error);
   }
 
@@ -125,9 +140,11 @@ function App() {
           isOpen={activeModal === "item-modal"}
           handleCloseItemModal={handleCloseItemModal}
         />
-        <AddItemModal
-          isOpen={activeModal === "add-garment-modal"}
-          handleAddItemSubmit={handleAddItemSubmit}
+        <ItemModal
+          card={selectedCard}
+          isOpen={activeModal === "item-modal"}
+          handleCloseItemModal={handleCloseItemModal}
+          handleDeleteItem={handleDeleteItem}
         />
       </div>
     </CurrentTemperatureUnitContext.Provider>

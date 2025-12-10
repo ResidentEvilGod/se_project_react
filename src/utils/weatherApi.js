@@ -1,33 +1,53 @@
 import { apiKey, coordinates } from "./constants";
 
-export function getWeatherData() {
-  return fetch(
-    `https://api.openweathermap.org/data/2.5/weather?lat=${coordinates.lat}&lon=${coordinates.lon}&units=imperial&appid=${apiKey}`
-  )
-    .then((res) => {
-      return res.ok
-        ? res.json()
-        : Promise.reject("Error from weather API: ${res.status}");
-    })
-    .then((data) => {
-      return parseWeatherData(data);
-    });
+function fetchWeatherByCoords(lat, lon) {
+  const url = `https://api.openweathermap.org/data/2.5/weather?lat=${lat}&lon=${lon}&units=imperial&appid=${apiKey}`;
+
+  return fetch(url).then((res) => {
+    return res.ok
+      ? res.json()
+      : Promise.reject(`Error from weather API: ${res.status}`);
+  });
 }
 
 function parseWeatherData(data) {
-  const parsedData = { temp: {} };
   const icon = data.weather[0].icon;
+  const tempF = Math.round(data.main.temp);
+  const tempC = Math.round(((tempF - 32) * 5) / 9);
 
-  parsedData.city = data.name;
-  parsedData.temp.F = Math.round(data.main.temp);
-  parsedData.temp.C = Math.round(((parsedData.temp.F - 32) * 5) / 9);
-  parsedData.weatherCondition = data.weather[0].main.toLowerCase();
-  parsedData.isDay = isDay(data.sys, Date.now());
-  parsedData.isDay = icon.includes("d");
-  return parsedData;
+  return {
+    city: data.name,
+    temp: {
+      F: tempF,
+      C: tempC,
+    },
+    weatherCondition: data.weather[0].main.toLowerCase(),
+    isDay: icon.includes("d"),
+  };
 }
 
-function isDay({ sunrise, sunset }, timestamp) {
-  const timestampInSeconds = 1000 * timestamp;
-  return sunrise < timestampInSeconds && timestampInSeconds < sunset;
+export function getWeatherData() {
+  return new Promise((resolve, reject) => {
+    if (!navigator.geolocation) {
+      fetchWeatherByCoords(coordinates.lat, coordinates.lon)
+        .then((data) => resolve(parseWeatherData(data)))
+        .catch(reject);
+      return;
+    }
+
+    navigator.geolocation.getCurrentPosition(
+      (position) => {
+        const { latitude, longitude } = position.coords;
+        fetchWeatherByCoords(latitude, longitude)
+          .then((data) => resolve(parseWeatherData(data)))
+          .catch(reject);
+      },
+      (error) => {
+        console.error("Error getting geolocation:", error);
+        fetchWeatherByCoords(coordinates.lat, coordinates.lon)
+          .then((data) => resolve(parseWeatherData(data)))
+          .catch(reject);
+      }
+    );
+  });
 }

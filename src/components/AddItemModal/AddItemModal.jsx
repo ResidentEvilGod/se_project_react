@@ -5,11 +5,13 @@ function AddItemModal({ isOpen, handleAddItemSubmit }) {
   const { values, handleChange } = useForm({
     name: "",
     weather: "hot",
-    image: "",
+    imageUrl: "",
   });
+
   const handleSubmit = (event) => {
     event.preventDefault();
-    handleAddItemSubmit({ ...values, imageUrl: values.link });
+    // values is { name, weather, imageUrl }
+    handleAddItemSubmit(values);
   };
 
   return (
@@ -33,13 +35,15 @@ function AddItemModal({ isOpen, handleAddItemSubmit }) {
             required
           />
         </label>
+
         <label htmlFor="add-garment-image" className="modal__label">
-          Image
+          Image URL
           <input
             id="add-garment-image"
-            name="image"
+            name="imageUrl"
             type="url"
-            value={values.image}
+            value={values.imageUrl}
+            onChange={handleChange}
             className="modal__input"
             required
           />
