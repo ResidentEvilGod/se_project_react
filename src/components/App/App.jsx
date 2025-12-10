@@ -1,24 +1,19 @@
 import { useEffect, useState } from "react";
+import { Routes, Route } from "react-router-dom";
 import Header from "../Header/Header";
 import Main from "../Main/Main";
 import Footer from "../Footer/Footer";
-
 import "./App.css";
 import ItemModal from "../ItemModal/ItemModal";
+import AddItemModal from "../AddItemModal/AddItemModal";
+import Profile from "../Profile/Profile";
 import { getWeatherData } from "../../utils/weatherApi";
 import CurrentTemperatureUnitContext from "../../contexts/CurrentTemperatureUnitContext";
-import Profile from "../Profile/Profile";
-import AddItemModal from "../AddItemModal/AddItemModal";
 import { getItems, addItem, deleteItem } from "../../utils/api";
 
 function App() {
-  const tempF = weatherData.temp.F;
-  const weatherType = getWeatherType(tempF);
-  const filteredItems = clothingItems.filter(
-    (item) => item.weather.toLowerCase() === weatherType
-  );
   const [clothingItems, setClothingItems] = useState([]);
-  const [activeModal, setActiveModal] = useState("");
+  const [activeModal, setActiveModal] = useState(""); // "", "item-modal", "add-garment-modal"
   const [selectedCard, setSelectedCard] = useState({});
   const [weatherData, setWeatherData] = useState({
     city: "",
@@ -28,48 +23,33 @@ function App() {
   });
   const [currentTempUnit, setCurrentTempUnit] = useState("F");
   function handleOpenItemModal(card) {
-    setActiveModal("item-modal");
     setSelectedCard(card);
+    setActiveModal("item-modal");
   }
-  function handleOpenAddGarmentModal(card) {
+
+  function handleCloseItemModal() {
+    setSelectedCard({});
+    setActiveModal("");
+  }
+
+  function handleOpenAddGarmentModal() {
     setActiveModal("add-garment-modal");
   }
-  function handleAddGarmentSubmit(e) {
-    e.preventDefault();
-    const name = e.target["add-garment-name-input"].value;
-    const link = e.target["add-garment-image"].value;
-    const weather = e.target.weather.value;
 
-    const newItem = {
-      _id: Date.now(),
-      name,
-      link,
-      weather,
-    };
-
-    setClothingItems((items) => [newItem, ...items]);
+  function handleCloseAddGarmentModal() {
     setActiveModal("");
   }
-  function handleCloseItemModal(card) {
-    setActiveModal("");
-  }
-
-  function handleCloseAddGarmentModal(card) {
-    setActiveModal("");
-  }
-
   function handleTempUnitChange() {
-    if (currentTempUnit == "F") {
+    if (currentTempUnit === "F") {
       setCurrentTempUnit("C");
     } else {
       setCurrentTempUnit("F");
     }
   }
-
   function handleAddItemSubmit(inputValues) {
     addItem(inputValues)
       .then((data) => {
-        setClothingItems((clothingItems) => [data, ...clothingItems]);
+        setClothingItems((prev) => [data, ...prev]);
         setActiveModal("");
       })
       .catch(console.error);
@@ -84,7 +64,6 @@ function App() {
       })
       .catch(console.error);
   }
-
   useEffect(() => {
     getWeatherData()
       .then((data) => {
@@ -100,7 +79,6 @@ function App() {
       })
       .catch(console.error);
   }, []);
-
   return (
     <CurrentTemperatureUnitContext.Provider
       value={{ currentTempUnit, handleTempUnitChange }}
@@ -109,7 +87,6 @@ function App() {
         <Header
           weatherData={weatherData}
           handleOpenAddGarmentModal={handleOpenAddGarmentModal}
-          handleCloseAddGarmentModal={handleCloseAddGarmentModal}
         />
         <Routes>
           <Route
@@ -119,10 +96,9 @@ function App() {
                 weatherData={weatherData}
                 clothingItems={clothingItems}
                 handleOpenItemModal={handleOpenItemModal}
-                handleCloseItemModal={handleCloseItemModal}
               />
             }
-          ></Route>
+          />
           <Route
             path="/profile"
             element={
@@ -132,13 +108,13 @@ function App() {
                 handleOpenItemModal={handleOpenItemModal}
               />
             }
-          ></Route>
+          />
         </Routes>
         <Footer />
-        <ItemModal
-          card={selectedCard}
-          isOpen={activeModal === "item-modal"}
-          handleCloseItemModal={handleCloseItemModal}
+        <AddItemModal
+          isOpen={activeModal === "add-garment-modal"}
+          handleAddItemSubmit={handleAddItemSubmit}
+          onClose={handleCloseAddGarmentModal}
         />
         <ItemModal
           card={selectedCard}
