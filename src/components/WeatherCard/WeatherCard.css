@@ -3,6 +3,7 @@
   overflow: hidden;
   border-radius: 12px;
   position: relative;
+  margin-top: 16px;
 }
 
 .weather-card__image {

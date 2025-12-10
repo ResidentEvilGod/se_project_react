@@ -4,13 +4,15 @@ import { useForm } from "../../hooks/useForm";
 function AddItemModal({ isOpen, handleAddItemSubmit, onClose }) {
   const { values, handleChange } = useForm({
     name: "",
-    weather: "hot",
     imageUrl: "",
+    weather: "hot",
   });
+
   const handleSubmit = (event) => {
     event.preventDefault();
-    handleAddItemSubmit(values); // { name, weather, imageUrl }
+    handleAddItemSubmit(values);
   };
+
   return (
     <ModalWithForm
       isOpen={isOpen}
@@ -26,28 +28,33 @@ function AddItemModal({ isOpen, handleAddItemSubmit, onClose }) {
           <input
             id="add-garment-name-input"
             name="name"
-            value={values.name}
-            onChange={handleChange}
             type="text"
             className="modal__input"
+            value={values.name}
+            onChange={handleChange}
+            placeholder="Name"
             required
           />
         </label>
+
         <label htmlFor="add-garment-image" className="modal__label">
-          Image URL
+          Image
           <input
             id="add-garment-image"
             name="imageUrl"
             type="url"
+            className="modal__input"
             value={values.imageUrl}
             onChange={handleChange}
-            className="modal__input"
+            placeholder="Image URL"
             required
           />
         </label>
       </fieldset>
+
       <fieldset className="modal__fieldset">
-        <legend>Select the weather type:</legend>
+        <legend className="modal__legend">Select the weather type:</legend>
+
         <div>
           <input
             className="modal__radio-btn"
@@ -59,9 +66,10 @@ function AddItemModal({ isOpen, handleAddItemSubmit, onClose }) {
             onChange={handleChange}
           />
           <label className="modal__label" htmlFor="hot">
-            Weather: Hot
+            Hot
           </label>
         </div>
+
         <div>
           <input
             className="modal__radio-btn"
@@ -73,9 +81,10 @@ function AddItemModal({ isOpen, handleAddItemSubmit, onClose }) {
             onChange={handleChange}
           />
           <label className="modal__label" htmlFor="warm">
-            Weather: Warm
+            Warm
           </label>
         </div>
+
         <div>
           <input
             className="modal__radio-btn"
@@ -87,7 +96,7 @@ function AddItemModal({ isOpen, handleAddItemSubmit, onClose }) {
             onChange={handleChange}
           />
           <label className="modal__label" htmlFor="cold">
-            Weather: Cold
+            Cold
           </label>
         </div>
       </fieldset>
