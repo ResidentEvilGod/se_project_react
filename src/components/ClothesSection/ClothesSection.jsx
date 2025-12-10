@@ -9,7 +9,7 @@ function ClothesSection({
   return (
     <section className="clothes-section">
       <div className="clothes-section__row">
-        Your items
+        <h2 className="clothes-section__title">Your items</h2>
         <button
           onClick={handleOpenAddGarmentModal}
           className="clothes-section__btn"
