@@ -13,7 +13,7 @@ import { getItems, addItem, deleteItem } from "../../utils/api";
 
 function App() {
   const [clothingItems, setClothingItems] = useState([]);
-  const [activeModal, setActiveModal] = useState(""); // "", "item-modal", "add-garment-modal"
+  const [activeModal, setActiveModal] = useState("");
   const [selectedCard, setSelectedCard] = useState({});
   const [weatherData, setWeatherData] = useState({
     city: "",
