@@ -4,7 +4,6 @@ import "./ItemModal.css";
 function ItemModal({ card, isOpen, handleCloseItemModal, handleDeleteItem }) {
   const [isConfirmMode, setIsConfirmMode] = useState(false);
 
-  // whenever the modal closes, reset back to normal view mode
   useEffect(() => {
     if (!isOpen) {
       setIsConfirmMode(false);
@@ -17,12 +16,10 @@ function ItemModal({ card, isOpen, handleCloseItemModal, handleDeleteItem }) {
   }
 
   function handleDeleteClick() {
-    // switch to confirm screen
     setIsConfirmMode(true);
   }
 
   function handleConfirmDelete() {
-    // actually delete the item (App.jsx will remove it + call the API)
     handleDeleteItem(card);
   }
 
@@ -41,7 +38,6 @@ function ItemModal({ card, isOpen, handleCloseItemModal, handleDeleteItem }) {
           X
         </button>
 
-        {/* Normal view: image + info + delete */}
         {!isConfirmMode && (
           <>
             <img src={card.imageUrl} alt={card.name} className="modal__image" />
@@ -59,7 +55,6 @@ function ItemModal({ card, isOpen, handleCloseItemModal, handleDeleteItem }) {
           </>
         )}
 
-        {/* Confirm view: “Are you sure… Yes / Cancel” */}
         {isConfirmMode && (
           <div className="modal__confirm">
             <p className="modal__confirm-title">
