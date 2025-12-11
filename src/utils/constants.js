@@ -1,6 +1,60 @@
 const coordinates = { lat: "32.486195", lon: "-92.173107" };
 const apiKey = "230a179187730aa31b3c1a708e24fd13";
 
+export const weatherOptions = [
+  {
+    day: true,
+    type: "clear",
+    url: new URL("../assets/day/clear.svg", import.meta.url).href,
+  },
+  {
+    day: true,
+    type: "clouds",
+    url: new URL("../assets/day/cloudy.svg", import.meta.url).href,
+  },
+  {
+    day: true,
+    type: "rain",
+    url: new URL("../assets/day/rain.svg", import.meta.url).href,
+  },
+  {
+    day: true,
+    type: "snow",
+    url: new URL("../assets/day/snow.svg", import.meta.url).href,
+  },
+  {
+    day: true,
+    type: "thunderstorm",
+    url: new URL("../assets/day/storm.svg", import.meta.url).href,
+  },
+
+  {
+    day: false,
+    type: "clear",
+    url: new URL("../assets/night/clear.svg", import.meta.url).href,
+  },
+  {
+    day: false,
+    type: "clouds",
+    url: new URL("../assets/night/cloudy.svg", import.meta.url).href,
+  },
+  {
+    day: false,
+    type: "rain",
+    url: new URL("../assets/night/rain.svg", import.meta.url).href,
+  },
+  {
+    day: false,
+    type: "snow",
+    url: new URL("../assets/night/snow.svg", import.meta.url).href,
+  },
+  {
+    day: false,
+    type: "thunderstorm",
+    url: new URL("../assets/night/storm.svg", import.meta.url).href,
+  },
+];
+
 export const weatherConditionImages = {
   day: {
     default: {
