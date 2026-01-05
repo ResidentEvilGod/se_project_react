@@ -1,8 +1,20 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useContext } from "react";
 import "./ItemModal.css";
+import CurrentUserContext from "../../contexts/CurrentUserContext";
 
-function ItemModal({ card, isOpen, handleCloseItemModal, handleDeleteItem }) {
+function ItemModal({
+  card,
+  isOpen,
+  handleCloseItemModal,
+  handleDeleteItem,
+  isLoggedIn,
+}) {
   const [isConfirmMode, setIsConfirmMode] = useState(false);
+
+  const currentUser = useContext(CurrentUserContext);
+  const ownerId = typeof card?.owner === "string" ? card.owner : card?.owner?._id;
+  const isOwn =
+    Boolean(ownerId) && Boolean(currentUser?._id) && ownerId === currentUser._id;
 
   useEffect(() => {
     if (!isOpen) {
@@ -30,11 +42,7 @@ function ItemModal({ card, isOpen, handleCloseItemModal, handleDeleteItem }) {
   return (
     <div className={`modal ${isOpen ? "modal_is-opened" : ""}`}>
       <div className="modal__container">
-        <button
-          type="button"
-          className="modal__close-btn"
-          onClick={handleClose}
-        >
+        <button type="button" className="modal__close-btn" onClick={handleClose}>
           X
         </button>
 
@@ -44,13 +52,17 @@ function ItemModal({ card, isOpen, handleCloseItemModal, handleDeleteItem }) {
             <div className="modal__footer">
               <h2 className="modal__text">{card.name}</h2>
               <p className="modal__text">Weather: {card.weather}</p>
-              <button
-                type="button"
-                onClick={handleDeleteClick}
-                className="modal__delete-btn"
-              >
-                Delete item
-              </button>
+
+              {/* ✅ Delete shown only for owner */}
+              {isOwn && (
+                <button
+                  type="button"
+                  onClick={handleDeleteClick}
+                  className="modal__delete-btn"
+                >
+                  Delete item
+                </button>
+              )}
             </div>
           </>
         )}
@@ -60,9 +72,7 @@ function ItemModal({ card, isOpen, handleCloseItemModal, handleDeleteItem }) {
             <p className="modal__confirm-title">
               Are you sure you want to delete this item?
             </p>
-            <p className="modal__confirm-subtitle">
-              This action is irreversible.
-            </p>
+            <p className="modal__confirm-subtitle">This action is irreversible.</p>
 
             <button
               type="button"
@@ -87,3 +97,4 @@ function ItemModal({ card, isOpen, handleCloseItemModal, handleDeleteItem }) {
 }
 
 export default ItemModal;
+

@@ -6,10 +6,11 @@ function Profile({
   clothingItems,
   handleOpenAddGarmentModal,
   handleOpenItemModal,
+  handleSignOut,
 }) {
   return (
     <main className="profile">
-      <SideBar />
+      <SideBar handleSignOut={handleSignOut} /> {/* ✅ added */}
       <ClothesSection
         clothingItems={clothingItems}
         handleOpenAddGarmentModal={handleOpenAddGarmentModal}
@@ -18,5 +19,6 @@ function Profile({
     </main>
   );
 }
+
 
 export default Profile;
