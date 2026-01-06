@@ -1,36 +1,33 @@
-import { useContext } from "react";
 import "./ClothesSection.css";
 import ItemCard from "../ItemCard/ItemCard";
-import CurrentUserContext from "../../contexts/CurrentUserContext";
 
 function ClothesSection({
   clothingItems,
-  handleOpenItemModal,
   handleOpenAddGarmentModal,
+  handleOpenItemModal,
+  onCardLike,
 }) {
-  const currentUser = useContext(CurrentUserContext);
-  const currentUserId = currentUser?._id;
-  const userItems = (clothingItems || []).filter((item) => {
-    const ownerId = typeof item.owner === "string" ? item.owner : item.owner?._id;
-    return Boolean(currentUserId) && ownerId === currentUserId;
-  });
-
   return (
     <section className="clothes-section">
-      <div className="clothes-section__row">
-        <h2 className="clothes-section__title">Your items</h2>
+      <div className="clothes-section__header">
+        <p className="clothes-section__title">Your items</p>
         <button
-          onClick={handleOpenAddGarmentModal}
-          className="clothes-section__btn"
           type="button"
+          className="clothes-section__add-new-btn"
+          onClick={handleOpenAddGarmentModal}
         >
           + Add new
         </button>
       </div>
 
       <ul className="clothes-section__items">
-        {userItems.map((item) => (
-          <ItemCard key={item._id} data={item} onCardClick={handleOpenItemModal} />
+        {clothingItems.map((item) => (
+          <ItemCard
+            key={item._id}
+            data={item}
+            onCardClick={handleOpenItemModal}
+            onCardLike={onCardLike}
+          />
         ))}
       </ul>
     </section>
@@ -38,4 +35,5 @@ function ClothesSection({
 }
 
 export default ClothesSection;
+
 

@@ -1,47 +1,30 @@
+import "./Main.css";
 import WeatherCard from "../WeatherCard/WeatherCard";
 import ItemCard from "../ItemCard/ItemCard";
-import "./Main.css";
-import { useContext } from "react";
-import CurrentTemperatureUnitContext from "../../contexts/CurrentTemperatureUnitContext";
 
-const getWeatherType = (tempF) => {
-  if (tempF >= 86) {
-    return "hot";
-  } else if (tempF >= 66) {
-    return "warm";
-  } else {
-    return "cold";
-  }
-};
-
-function Main({ clothingItems, handleOpenItemModal, weatherData }) {
-  const { currentTempUnit } = useContext(CurrentTemperatureUnitContext);
-  const tempF = weatherData.temp.F;
-  const weatherType = getWeatherType(tempF);
-  const filteredItems = clothingItems.filter(
-    (item) => item.weather.toLowerCase() === weatherType
-  );
-
+function Main({ clothingItems, handleOpenItemModal, onCardLike, weatherData }) {
   return (
     <main className="main">
       <WeatherCard weatherData={weatherData} />
-      <p className="main__text">
-        Today is {weatherData.temp[currentTempUnit]}&deg; {currentTempUnit} /
-        You may want to wear:
-      </p>
-      <ul className="main__card-list">
-        {filteredItems.map((item) => {
-          return (
+
+      <section className="cards">
+        <p className="cards__text">Today is {weatherData?.temp?.F}° F / You may want to wear:</p>
+
+        <ul className="cards__list">
+          {clothingItems.map((item) => (
             <ItemCard
               key={item._id}
               data={item}
               onCardClick={handleOpenItemModal}
+              onCardLike={onCardLike}
             />
-          );
-        })}
-      </ul>
+          ))}
+        </ul>
+      </section>
     </main>
   );
 }
 
 export default Main;
+
+

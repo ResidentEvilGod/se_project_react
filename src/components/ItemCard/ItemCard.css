@@ -35,3 +35,37 @@
   object-fit: cover;
   border-radius: 16px;
 }
+
+.card__likes {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.card__like-button {
+  position: absolute;
+  top: 15px;
+  right: 15px;
+  width: 28px;
+  height: 28px;
+  border: none;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.9);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  color: rgba(0, 0, 0, 0.4);
+}
+
+.card__like-button:hover {
+  color: rgba(0, 0, 0, 0.8);
+}
+
+.card__like-button_active {
+  color: rgba(0, 0, 0, 1);
+}
+
+.card__like-icon {
+  display: block;
+}

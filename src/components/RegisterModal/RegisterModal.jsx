@@ -86,12 +86,4 @@ function RegisterModal({ isOpen, onClose, handleRegisterSubmit }) {
   );
 }
 
-<RegisterModal
-  isOpen={activeModal === "register-modal"}
-  onClose={() => setActiveModal("")}
-  handleRegisterSubmit={handleRegisterSubmit}
-/>
-
-
 export default RegisterModal;
-

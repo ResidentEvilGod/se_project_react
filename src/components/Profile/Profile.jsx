@@ -6,19 +6,26 @@ function Profile({
   clothingItems,
   handleOpenAddGarmentModal,
   handleOpenItemModal,
+  handleOpenEditProfileModal,
+  onCardLike,
   handleSignOut,
 }) {
   return (
     <main className="profile">
-      <SideBar handleSignOut={handleSignOut} /> {/* ✅ added */}
+      <SideBar
+        handleSignOut={handleSignOut}
+        handleOpenEditProfileModal={handleOpenEditProfileModal}
+      />
+
       <ClothesSection
         clothingItems={clothingItems}
         handleOpenAddGarmentModal={handleOpenAddGarmentModal}
         handleOpenItemModal={handleOpenItemModal}
+        onCardLike={onCardLike}
       />
     </main>
   );
 }
 
-
 export default Profile;
+
