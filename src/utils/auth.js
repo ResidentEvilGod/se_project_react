@@ -1,5 +1,5 @@
 const baseUrl = import.meta.env.PROD
-  ? "https://api.nickproject15.evils.in"
+  ? "https://api.nickproject15.minecraftnoob.com"
   : "http://localhost:3001";
 
 function checkResponse(res) {
