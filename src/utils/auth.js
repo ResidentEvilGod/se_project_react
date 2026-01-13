@@ -1,4 +1,6 @@
-const baseUrl = "http://localhost:3001";
+const baseUrl = import.meta.env.PROD
+  ? "https://api.nickproject15.evils.in"
+  : "http://localhost:3001";
 
 function checkResponse(res) {
   if (res.ok) {

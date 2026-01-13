@@ -1,4 +1,6 @@
-const baseUrl = "http://localhost:3001";
+const baseUrl = import.meta.env.PROD
+  ? "https://api.nickproject15.evils.in"
+  : "http://localhost:3001";
 
 function checkResponse(res) {
   if (res.ok) {
@@ -52,7 +54,6 @@ export function updateProfile({ name, avatar }, token) {
   }).then(checkResponse);
 }
 
-/* ✅ Likes / Dislikes */
 export function addCardLike(itemId, token) {
   if (!token) return Promise.reject("No token provided");
 
