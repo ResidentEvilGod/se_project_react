@@ -9,7 +9,8 @@
     "build": "vite build",
     "lint": "eslint . --ext js,jsx --report-unused-disable-directives --max-warnings 0",
     "preview": "vite preview",
-    "json-server": "json-server --watch db.json --id _id --port 3001"
+    "json-server": "json-server --watch db.json --id _id --port 3001",
+    "deploy": "npm run build && scp -r ./dist/* resmaster19@nickproject15.minecraftnoob.com:/home/resmaster19/frontend"
   },
   "dependencies": {
     "react": "^18.3.1",
@@ -27,3 +28,4 @@
     "vite": "^5.3.1"
   }
 }
+
