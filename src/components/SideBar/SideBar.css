@@ -1,8 +1,7 @@
 .sidebar {
-  display: flex;
+   display: flex;
   flex-direction: column;
-  gap: 16px;
-  max-width: 200px;
+  gap: 24px;
 }
 
 .sidebar__row {
@@ -14,10 +13,11 @@
 .sidebar__user {
   display: flex;
   align-items: center;
-  gap: 12px;
+  gap: 16px;
 }
 
 .sidebar__username {
+    margin: 0;
   font-family: Cabinet Grotesk, sans-serif;
   font-weight: 700;
   font-size: 20px;
@@ -51,7 +51,7 @@
 }
 
 .sidebar__button {
-  border: none;
+   border: none;
   background: transparent;
   padding: 0;
   text-align: left;
