@@ -67,51 +67,49 @@ function AddItemModal({ isOpen, handleAddItemSubmit, onClose }) {
       <fieldset className="modal__fieldset modal__fieldset_type_radio">
         <legend className="modal__legend">Select the weather type:</legend>
 
-        <div className="modal__radio-group">
-          <div className="modal__radio-row">
-            <input
-              className="modal__radio-btn"
-              type="radio"
-              id="hot"
-              name="weather"
-              value="hot"
-              checked={values.weather === "hot"}
-              onChange={handleChange}
-            />
-            <label className="modal__radio-label" htmlFor="hot">
-              Hot
-            </label>
-          </div>
+        <div className="modal__radio-row">
+          <input
+            className="modal__radio-btn"
+            type="radio"
+            id="hot"
+            name="weather"
+            value="hot"
+            checked={values.weather === "hot"}
+            onChange={handleChange}
+          />
+          <label className="modal__radio-label" htmlFor="hot">
+            Hot
+          </label>
+        </div>
 
-          <div className="modal__radio-row">
-            <input
-              className="modal__radio-btn"
-              type="radio"
-              id="warm"
-              name="weather"
-              value="warm"
-              checked={values.weather === "warm"}
-              onChange={handleChange}
-            />
-            <label className="modal__radio-label" htmlFor="warm">
-              Warm
-            </label>
-          </div>
+        <div className="modal__radio-row">
+          <input
+            className="modal__radio-btn"
+            type="radio"
+            id="warm"
+            name="weather"
+            value="warm"
+            checked={values.weather === "warm"}
+            onChange={handleChange}
+          />
+          <label className="modal__radio-label" htmlFor="warm">
+            Warm
+          </label>
+        </div>
 
-          <div className="modal__radio-row">
-            <input
-              className="modal__radio-btn"
-              type="radio"
-              id="cold"
-              name="weather"
-              value="cold"
-              checked={values.weather === "cold"}
-              onChange={handleChange}
-            />
-            <label className="modal__radio-label" htmlFor="cold">
-              Cold
-            </label>
-          </div>
+        <div className="modal__radio-row">
+          <input
+            className="modal__radio-btn"
+            type="radio"
+            id="cold"
+            name="weather"
+            value="cold"
+            checked={values.weather === "cold"}
+            onChange={handleChange}
+          />
+          <label className="modal__radio-label" htmlFor="cold">
+            Cold
+          </label>
         </div>
       </fieldset>
     </ModalWithForm>
