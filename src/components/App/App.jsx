@@ -42,23 +42,22 @@ function App() {
   const [clothingItems, setClothingItems] = useState([]);
   const [selectedCard, setSelectedCard] = useState({});
   const [activeModal, setActiveModal] = useState("");
+  const [loginError, setLoginError] = useState("");
+
 
   const [currentTempUnit, setCurrentTempUnit] = useState("F");
   const [currentUser, setCurrentUser] = useState({});
   const [isLoggedIn, setIsLoggedIn] = useState(false);
   const [token, setToken] = useState(localStorage.getItem("jwt") || "");
 
-  // Weather
   useEffect(() => {
     getWeatherData().then(setWeatherData).catch(console.error);
   }, []);
 
-  // Items
   useEffect(() => {
     getItems().then(setClothingItems).catch(console.error);
   }, []);
 
-  // Restore session
   useEffect(() => {
     if (!token) return;
 
@@ -80,7 +79,6 @@ function App() {
     setCurrentTempUnit((prev) => (prev === "F" ? "C" : "F"));
   }
 
-  // Modals
   function handleOpenItemModal(card) {
     setSelectedCard(card);
     setActiveModal("item-modal");
@@ -115,7 +113,6 @@ function App() {
     setSelectedCard({});
   }
 
-  // API handlers
   function handleAddItemSubmit(values) {
     addItem(values, token)
       .then((newItem) => {
@@ -134,7 +131,6 @@ function App() {
       .catch(console.error);
   }
 
-  // ✅ Likes/Dislikes handler (App owns clothingItems state)
   function handleCardLike(item) {
     const jwt = localStorage.getItem("jwt") || token;
 
@@ -162,7 +158,6 @@ function App() {
           items.map((i) => (i._id === itemId ? updatedItem : i))
         );
 
-        // Keeps ItemModal in sync if it is open on this same item
         setSelectedCard((prev) => (prev?._id === itemId ? updatedItem : prev));
       })
       .catch(console.error);
@@ -177,7 +172,6 @@ function App() {
       .catch(console.error);
   }
 
-  // Auth
   function handleRegisterSubmit({ name, avatar, email, password }) {
     signup({ name, avatar, email, password })
       .then(() => signin({ email, password }))
@@ -191,17 +185,22 @@ function App() {
       .catch(console.error);
   }
 
-  function handleLoginSubmit({ email, password }) {
-    signin({ email, password })
-      .then(({ token: jwt }) => {
-        localStorage.setItem("jwt", jwt);
-        setToken(jwt);
-        setIsLoggedIn(true);
-        handleCloseModal();
-        navigate("/profile");
-      })
-      .catch(console.error);
-  }
+ function handleLoginSubmit({ email, password }) {
+  setLoginError("");
+
+  signin({ email, password })
+    .then(({ token: jwt }) => {
+      localStorage.setItem("jwt", jwt);
+      setToken(jwt);
+      setIsLoggedIn(true);
+      setLoginError("");
+      handleCloseModal();
+      navigate("/profile");
+    })
+    .catch(() => {
+      setLoginError("Email or password incorrect");
+    });
+}
 
   function handleSignOut() {
     localStorage.removeItem("jwt");
@@ -278,16 +277,20 @@ function App() {
           />
 
           <RegisterModal
-            isOpen={activeModal === "register-modal"}
-            onClose={handleCloseModal}
-            handleRegisterSubmit={handleRegisterSubmit}
-          />
+  isOpen={activeModal === "register-modal"}
+  onClose={handleCloseModal}
+  handleRegisterSubmit={handleRegisterSubmit}
+  onSwitchToLogin={() => setActiveModal("login-modal")}
+/>
 
-          <LoginModal
-            isOpen={activeModal === "login-modal"}
-            onClose={handleCloseModal}
-            handleLoginSubmit={handleLoginSubmit}
-          />
+     <LoginModal
+  isOpen={activeModal === "login-modal"}
+  onClose={handleCloseModal}
+  handleLoginSubmit={handleLoginSubmit}
+  onSwitchToRegister={() => setActiveModal("register-modal")}
+  errorMessage={loginError}
+  onClearError={() => setLoginError("")}
+/>
         </div>
       </CurrentTemperatureUnitContext.Provider>
     </CurrentUserContext.Provider>

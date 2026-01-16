@@ -29,6 +29,17 @@
   overflow: hidden;
 }
 
+.modal__container_type_preview {
+  width: 498px;
+  max-width: calc(100vw - 40px);
+  background: #ffffff;
+  border-radius: 20px;
+  overflow: hidden;
+  position: relative;
+  display: flex;
+  flex-direction: column; /* KEY: stacked layout */
+}
+
 .modal__content {
   display: grid;
   grid-template-columns: 2fr 1fr;
@@ -54,10 +65,10 @@
 }
 
 .modal__image {
-  display: block;
   width: 100%;
-  height: 100%;
+  height: 498px;
   object-fit: cover;
+  display: block;
 }
 
 .modal__info {
@@ -85,19 +96,34 @@
   cursor: pointer;
 }
 
-.modal__delete-btn {
+.modal__close-btn_type_preview {
+  position: absolute;
+  top: 20px;
+  right: 20px;
   border: none;
-  padding: 0;
   background: transparent;
+  font-size: 22px;
+  color: #ffffff;
+  cursor: pointer;
+  z-index: 2;
+}
+
+.modal__close-btn_type_preview:hover {
+  opacity: 0.85;
+}
+
+.modal__delete-btn {
+border: none;
+  background: transparent;
+  padding: 0;
   font: inherit;
   font-weight: 700;
-  color: #ff4f4f;
+  color: #ff4d00;
   cursor: pointer;
-  align-self: flex-start;
 }
 
 .modal__delete-btn:hover {
-  opacity: 0.7;
+    opacity: 0.8;
 }
 
 .modal__confirm {
@@ -117,28 +143,29 @@
 
 .modal__confirm-subtitle {
   margin: 0 0 32px;
-  font-size: 16px;
+ font-size: 16px;
   font-weight: 400;
   color: rgba(0, 0, 0, 1);
 }
 
 .modal__confirm-delete {
-  border: none;
+   border: none;
   background: transparent;
+  padding: 0;
   font: inherit;
   font-weight: 700;
-  color: #ff4f4f;
+  color: #ff4d00;
   cursor: pointer;
-  margin-bottom: 16px;
 }
 
 .modal__confirm-delete:hover {
-  opacity: 0.7;
+  opacity: 0.8;
 }
 
 .modal__confirm-cancel {
-  border: none;
+   border: none;
   background: transparent;
+  padding: 0;
   font: inherit;
   font-weight: 700;
   color: rgba(0, 0, 0, 1);
@@ -146,5 +173,30 @@
 }
 
 .modal__confirm-cancel:hover {
-  opacity: 0.7;
+   opacity: 0.8;
+}
+
+.modal__footer {
+  padding: 20px 32px 32px;
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+}
+
+.modal__caption {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.modal__title {
+  margin: 0;
+  font-size: 20px;
+  font-weight: 700;
+}
+
+.modal__weather {
+  margin: 0;
+  font-size: 20px;
+  font-weight: 700;
 }

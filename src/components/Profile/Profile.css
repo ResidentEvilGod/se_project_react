@@ -1,4 +1,13 @@
 .profile {
   display: flex;
   gap: 116px;
+  margin-top: 47px;
+}
+
+.profile__sidebar {
+  width: 229px;
+}
+
+.profile__items {
+  flex: 1;
 }

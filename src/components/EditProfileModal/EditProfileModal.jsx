@@ -20,6 +20,8 @@ function EditProfileModal({ isOpen, onClose, handleEditProfileSubmit }) {
     });
   }, [isOpen, currentUser, setValues]);
 
+  const isSubmitDisabled = !values.name || !values.avatar;
+
   function handleSubmit(e) {
     e.preventDefault();
     handleEditProfileSubmit({
@@ -31,15 +33,16 @@ function EditProfileModal({ isOpen, onClose, handleEditProfileSubmit }) {
   return (
     <ModalWithForm
       isOpen={isOpen}
-      title="Edit profile"
-      buttonText="Save"
+      title="Change profile data"
+      buttonText="Save changes"
       name="edit-profile-form"
       handleSubmit={handleSubmit}
       onClose={onClose}
+      isSubmitDisabled={isSubmitDisabled}
     >
       <fieldset className="modal__fieldset">
         <label htmlFor="edit-profile-name" className="modal__label">
-          Name
+          Name *
           <input
             id="edit-profile-name"
             name="name"
@@ -55,7 +58,7 @@ function EditProfileModal({ isOpen, onClose, handleEditProfileSubmit }) {
         </label>
 
         <label htmlFor="edit-profile-avatar" className="modal__label">
-          Avatar URL
+          Avatar *
           <input
             id="edit-profile-avatar"
             name="avatar"
@@ -73,3 +76,4 @@ function EditProfileModal({ isOpen, onClose, handleEditProfileSubmit }) {
 }
 
 export default EditProfileModal;
+

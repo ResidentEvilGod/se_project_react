@@ -1,7 +1,9 @@
 .header {
   display: flex;
   justify-content: space-between;
+  align-items: center;
 }
+
 .header__side {
   display: flex;
   align-items: center;
@@ -9,6 +11,19 @@
 
 .header__logo {
   margin-right: 24px;
+}
+
+.header__dateTime {
+  margin-right: 3px;
+  font-weight: 700;
+  font-size: 20px;
+}
+
+.header__place {
+  margin: 0;
+  font-weight: 700;
+  font-size: 20px;
+  line-height: 24px;
 }
 
 .header__add-clothes-btn {
@@ -20,6 +35,32 @@
   color: rgba(0, 0, 0, 1);
   background: transparent;
   border: none;
+  cursor: pointer;
+}
+
+.header__add-clothes-btn:hover {
+  opacity: 0.8;
+}
+
+.header__auth {
+  display: flex;
+  gap: 20px;
+}
+
+.header__auth-btn {
+  font-family: Cabinet Grotesk, sans-serif;
+  font-weight: 700;
+  font-size: 20px;
+  line-height: 24px;
+  color: rgba(0, 0, 0, 1);
+  background: transparent;
+  border: none;
+  padding: 0;
+  cursor: pointer;
+}
+
+.header__auth-btn:hover {
+  opacity: 0.8;
 }
 
 .header__username {
@@ -29,16 +70,11 @@
   font-size: 20px;
 }
 
-.header__dateTime {
-  margin-right: 3px;
-  font-weight: 700;
-  font-size: 20px;
-}
-
 .header__link {
   display: flex;
   text-decoration: none;
   color: #000;
+  align-items: center;
 }
 
 .header__avatar {
@@ -55,8 +91,9 @@
   display: flex;
   align-items: center;
   justify-content: center;
+  font-family: Cabinet Grotesk, sans-serif;
   font-weight: 700;
-  font-size: 18px;
-  background: rgba(0, 0, 0, 0.1);
+  font-size: 20px;
+  color: #fff;
+  background: #000;
 }
-

@@ -2,7 +2,7 @@ import logo from "../../assets/logo.svg";
 import "./Header.css";
 import ToggleSwitch from "../ToggleSwitch/ToggleSwitch";
 import { Link } from "react-router-dom";
-import { useContext } from "react";
+import { useContext, useEffect, useState } from "react";
 import CurrentUserContext from "../../contexts/CurrentUserContext";
 
 function Header({
@@ -23,6 +23,12 @@ function Header({
   const userName = currentUser?.name || "";
   const userAvatar = currentUser?.avatar || "";
   const avatarFallbackLetter = (userName.trim()[0] || "?").toUpperCase();
+
+  const [isAvatarOk, setIsAvatarOk] = useState(true);
+
+  useEffect(() => {
+    setIsAvatarOk(true);
+  }, [userAvatar]);
 
   return (
     <header className="header">
@@ -52,11 +58,12 @@ function Header({
             <Link className="header__link" to="/profile">
               <p className="header__username">{userName}</p>
 
-              {userAvatar ? (
+              {userAvatar && isAvatarOk ? (
                 <img
                   src={userAvatar}
                   alt={`${userName}'s avatar`}
                   className="header__avatar"
+                  onError={() => setIsAvatarOk(false)}
                 />
               ) : (
                 <div

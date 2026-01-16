@@ -1,6 +1,4 @@
-const baseUrl = import.meta.env.PROD
-  ? "https://api.nickproject15.minecraftnoob.com"
-  : "http://localhost:3001";
+const baseUrl = import.meta.env.DEV ? "http://localhost:3001" : "";
 
 function checkResponse(res) {
   if (res.ok) {
@@ -42,4 +40,5 @@ export function checkToken(token) {
     },
   }).then(checkResponse);
 }
+
 

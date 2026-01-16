@@ -4,6 +4,9 @@
   border-radius: 12px;
   position: relative;
   margin-top: 16px;
+  background-size: cover;
+  background-position: right top;
+  background-repeat: no-repeat;
 }
 
 .weather-card__image {
@@ -15,10 +18,11 @@
 
 .weather-card__temp {
   position: absolute;
-  bottom: 20px;
+  top: 20px;
   left: 16px;
   font-size: 36px;
   line-height: 1.1;
   margin: 0;
-  color: rgba(0, 0, 0, 1);
+  font-weight: 700;
+  color: #ffffff;
 }

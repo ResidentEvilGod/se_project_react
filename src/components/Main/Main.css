@@ -2,20 +2,43 @@
   margin-top: 32px;
 }
 
-.main__text {
-  margin: 24px 0 32px;
+.cards {
+  margin-top: 24px;
+}
+
+.cards__text {
+  margin: 0 0 32px;
   font-family: Cabinet Grotesk, sans-serif;
   font-size: 20px;
   font-weight: 700;
+  line-height: 24px;
   color: rgba(0, 0, 0, 1);
 }
 
-.main__card-list {
-  display: flex;
-  flex-wrap: wrap;
+.cards__list {
+ display: grid;
+  grid-template-columns: repeat(4, 325px);
   gap: 20px;
   padding: 0;
   margin: 0;
   list-style-type: none;
-  justify-content: center;
+}
+
+
+@media (max-width: 1400px) {
+  .cards__list {
+    grid-template-columns: repeat(3, 325px);
+  }
+}
+
+@media (max-width: 1060px) {
+  .cards__list {
+    grid-template-columns: repeat(2, 325px);
+  }
+}
+
+@media (max-width: 720px) {
+  .cards__list {
+    grid-template-columns: 1fr;
+  }
 }

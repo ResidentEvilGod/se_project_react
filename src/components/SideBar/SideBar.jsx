@@ -1,4 +1,4 @@
-import { useContext } from "react";
+import { useContext, useEffect, useState } from "react";
 import "./SideBar.css";
 import CurrentUserContext from "../../contexts/CurrentUserContext";
 
@@ -9,14 +9,21 @@ function SideBar({ handleSignOut, handleOpenEditProfileModal }) {
   const userAvatar = currentUser?.avatar || "";
   const avatarFallbackLetter = (userName.trim()[0] || "?").toUpperCase();
 
+  const [isAvatarOk, setIsAvatarOk] = useState(true);
+
+  useEffect(() => {
+    setIsAvatarOk(true);
+  }, [userAvatar]);
+
   return (
     <section className="sidebar">
       <div className="sidebar__row">
-        {userAvatar ? (
+        {userAvatar && isAvatarOk ? (
           <img
             src={userAvatar}
             alt={`${userName}'s avatar`}
             className="sidebar__avatar"
+            onError={() => setIsAvatarOk(false)}
           />
         ) : (
           <div
@@ -36,15 +43,11 @@ function SideBar({ handleSignOut, handleOpenEditProfileModal }) {
           className="sidebar__button"
           onClick={handleOpenEditProfileModal}
         >
-          Edit profile
+          Change profile data
         </button>
 
-        <button
-          type="button"
-          className="sidebar__button"
-          onClick={handleSignOut}
-        >
-          Sign out
+        <button type="button" className="sidebar__button" onClick={handleSignOut}>
+          Log out
         </button>
       </div>
     </section>
@@ -52,3 +55,4 @@ function SideBar({ handleSignOut, handleOpenEditProfileModal }) {
 }
 
 export default SideBar;
+
