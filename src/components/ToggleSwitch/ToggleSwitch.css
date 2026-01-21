@@ -14,21 +14,37 @@
   box-sizing: border-box;
   cursor: pointer;
   user-select: none;
+  padding: 0;
 }
 
+/* Labels sit ABOVE the knob so they never get covered */
 .toggle__labels {
   position: absolute;
   inset: 0;
   display: flex;
   align-items: center;
-  justify-content: space-between;
-  padding: 0 10px;
+  z-index: 3;
+  pointer-events: none; /* ensures clicks always hit the button */
   font-family: Cabinet Grotesk, sans-serif;
   font-weight: 700;
   font-size: 14px;
   line-height: 18px;
+}
+
+/* Each label takes half the switch and centers itself */
+.toggle__label {
+  width: 50%;
+  text-align: center;
   color: rgba(0, 0, 0, 0.6);
-  z-index: 1;
+}
+
+/* Active label turns white so it shows on the black knob */
+.toggle__container_is-f .toggle__label_f {
+  color: #ffffff;
+}
+
+.toggle__container_is-c .toggle__label_c {
+  color: #ffffff;
 }
 
 .toggle__knob {
@@ -39,7 +55,7 @@
   height: 28px;
   border-radius: 50%;
   background: #000000;
-  z-index: 2;
+  z-index: 1;
   transition: left 200ms ease;
 }
 
@@ -50,4 +66,5 @@
 .toggle__knob_right {
   left: 28px;
 }
+
 

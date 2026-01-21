@@ -45,7 +45,9 @@
 .header__auth {
   display: flex;
   gap: 20px;
-}
+  margin-left: 20px; }
+  
+
 
 .header__auth-btn {
   font-family: Cabinet Grotesk, sans-serif;

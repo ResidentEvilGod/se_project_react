@@ -3,7 +3,6 @@ import { useContext } from "react";
 import CurrentTemperatureUnitContext from "../../contexts/CurrentTemperatureUnitContext";
 
 function ToggleSwitch() {
-  // App provides: { currentTempUnit, handleTempUnitChange }
   const { currentTempUnit, handleTempUnitChange } = useContext(
     CurrentTemperatureUnitContext
   );
@@ -14,13 +13,15 @@ function ToggleSwitch() {
     <div className="toggle">
       <button
         type="button"
-        className="toggle__container"
+        className={`toggle__container ${
+          isF ? "toggle__container_is-f" : "toggle__container_is-c"
+        }`}
         aria-label="Toggle temperature unit"
         onClick={handleTempUnitChange}
       >
         <div className="toggle__labels">
-          <span>F</span>
-          <span>C</span>
+          <span className="toggle__label toggle__label_f">F</span>
+          <span className="toggle__label toggle__label_c">C</span>
         </div>
 
         <div
@@ -34,5 +35,6 @@ function ToggleSwitch() {
 }
 
 export default ToggleSwitch;
+
 
 
