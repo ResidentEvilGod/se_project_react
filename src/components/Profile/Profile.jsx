@@ -4,22 +4,22 @@ import ClothesSection from "../ClothesSection/ClothesSection";
 
 function Profile({
   clothingItems,
-  handleOpenAddGarmentModal,
   handleOpenItemModal,
-  handleOpenEditProfileModal,
+  handleAddItemModalOpen,
   onCardLike,
-  handleSignOut,
+  onEditProfile,
+  onLogout,
 }) {
   return (
     <main className="profile">
       <SideBar
-        handleSignOut={handleSignOut}
-        handleOpenEditProfileModal={handleOpenEditProfileModal}
+        handleSignOut={onLogout}
+        handleOpenEditProfileModal={onEditProfile}
       />
 
       <ClothesSection
         clothingItems={clothingItems}
-        handleOpenAddGarmentModal={handleOpenAddGarmentModal}
+        handleOpenAddGarmentModal={handleAddItemModalOpen}
         handleOpenItemModal={handleOpenItemModal}
         onCardLike={onCardLike}
       />
@@ -28,4 +28,5 @@ function Profile({
 }
 
 export default Profile;
+
 

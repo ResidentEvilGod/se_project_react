@@ -1,9 +1,13 @@
-const baseUrl = import.meta.env.DEV ? "http://localhost:3001" : "";
+// In development we hit the local API.
+// In production the API is served from the `api.` subdomain.
+const baseUrl = (() => {
+  if (import.meta.env.DEV) return "http://localhost:3001";
+  const host = window.location.hostname.replace(/^www\./, "");
+  return `https://api.${host}`;
+})();
 
 function checkResponse(res) {
-  if (res.ok) {
-    return res.json();
-  }
+  if (res.ok) return res.json();
 
   return res
     .json()
@@ -14,9 +18,7 @@ function checkResponse(res) {
 export function signup({ name, avatar, email, password }) {
   return fetch(`${baseUrl}/signup`, {
     method: "POST",
-    headers: {
-      "Content-Type": "application/json",
-    },
+    headers: { "Content-Type": "application/json" },
     body: JSON.stringify({ name, avatar, email, password }),
   }).then(checkResponse);
 }
@@ -24,9 +26,7 @@ export function signup({ name, avatar, email, password }) {
 export function signin({ email, password }) {
   return fetch(`${baseUrl}/signin`, {
     method: "POST",
-    headers: {
-      "Content-Type": "application/json",
-    },
+    headers: { "Content-Type": "application/json" },
     body: JSON.stringify({ email, password }),
   }).then(checkResponse);
 }
@@ -40,5 +40,6 @@ export function checkToken(token) {
     },
   }).then(checkResponse);
 }
+
 
 

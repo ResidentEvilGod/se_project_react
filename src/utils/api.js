@@ -1,9 +1,12 @@
-const baseUrl = import.meta.env.DEV ? "http://localhost:3001" : "";
+const baseUrl = (() => {
+  if (import.meta.env.DEV) return "http://localhost:3001";
+
+  const host = window.location.hostname.replace(/^www\./, "");
+  return `https://api.${host}`;
+})();
 
 function checkResponse(res) {
-  if (res.ok) {
-    return res.json();
-  }
+  if (res.ok) return res.json();
 
   return res
     .json()
@@ -73,3 +76,4 @@ export function removeCardLike(itemId, token) {
     },
   }).then(checkResponse);
 }
+
