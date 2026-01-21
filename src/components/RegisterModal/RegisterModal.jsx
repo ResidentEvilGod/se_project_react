@@ -2,7 +2,13 @@ import { useEffect, useState } from "react";
 import ModalWithForm from "../ModalWithForm/ModalWithForm";
 import { useForm } from "../../hooks/useForm";
 
-function RegisterModal({ isOpen, onClose, handleRegisterSubmit, onSwitch }) {
+function RegisterModal({
+  isOpen,
+  onClose,
+  handleRegisterSubmit,
+  onSwitchToLogin,
+  onSwitch,
+}) {
   const { values, handleChange, setValues } = useForm({
     email: "",
     password: "",
@@ -53,23 +59,16 @@ function RegisterModal({ isOpen, onClose, handleRegisterSubmit, onSwitch }) {
     const { name, validity, minLength } = input;
 
     if (validity.valueMissing) return "This field is required";
-
     if (name === "email" && validity.typeMismatch) return "This is not a valid email";
     if (name === "avatar" && validity.typeMismatch) return "This is not a valid URL";
-
     if (validity.tooShort) return `Must be at least ${minLength} characters`;
 
-    return "Invalid value";
+    return "";
   };
 
   const validateField = (e) => {
     const { name } = e.target;
-
-    let msg = "";
-    if (!e.target.validity.valid) {
-      msg = getErrorMessage(e.target);
-    }
-
+    const msg = e.target.validity.valid ? "" : getErrorMessage(e.target);
     setErrors((prev) => ({ ...prev, [name]: msg }));
   };
 
@@ -95,10 +94,9 @@ function RegisterModal({ isOpen, onClose, handleRegisterSubmit, onSwitch }) {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-
-    handleRegisterSubmit(values, () => {
-      setValues({ email: "", password: "", name: "", avatar: "" });
-    });
+    if (typeof handleRegisterSubmit === "function") {
+      handleRegisterSubmit(values);
+    }
   };
 
   return (
@@ -107,9 +105,9 @@ function RegisterModal({ isOpen, onClose, handleRegisterSubmit, onSwitch }) {
       buttonText="Sign Up"
       isOpen={isOpen}
       onClose={onClose}
-      onSubmit={handleSubmit}
-      footerLinkText="or Log In"
-      footerLinkOnClick={onSwitch}
+      handleSubmit={handleSubmit}
+      switchText="Log In"
+      onSwitch={onSwitchToLogin || onSwitch}
       isSubmitDisabled={isSubmitDisabled}
     >
       <label
@@ -194,5 +192,6 @@ function RegisterModal({ isOpen, onClose, handleRegisterSubmit, onSwitch }) {
 }
 
 export default RegisterModal;
+
 
 

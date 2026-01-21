@@ -2,68 +2,68 @@ import { useEffect, useState } from "react";
 import ModalWithForm from "../ModalWithForm/ModalWithForm";
 import { useForm } from "../../hooks/useForm";
 
-function LoginModal({ isOpen, onClose, handleLoginSubmit, onSwitch, hasError }) {
+function LoginModal({
+  isOpen,
+  onClose,
+  handleLoginSubmit,
+  onSwitchToRegister,
+  onSwitch,
+  errorMessage,
+  onClearError,
+}) {
   const { values, handleChange, setValues } = useForm({
     email: "",
     password: "",
   });
 
-  const [errors, setErrors] = useState({
-    email: "",
-  });
+  const [emailError, setEmailError] = useState("");
+  const [emailTouched, setEmailTouched] = useState(false);
 
-  const [touched, setTouched] = useState({
-    email: false,
-  });
+  const authError = errorMessage || "";
+  const hasAuthError = Boolean(authError);
 
   useEffect(() => {
     if (!isOpen) return;
 
-    setValues({
-      email: "",
-      password: "",
-    });
+    setValues({ email: "", password: "" });
+    setEmailError("");
+    setEmailTouched(false);
 
-    setErrors({ email: "" });
-    setTouched({ email: false });
-  }, [isOpen, setValues]);
+    if (typeof onClearError === "function") onClearError();
+  }, [isOpen, setValues, onClearError]);
 
-  const getErrorMessage = (input) => {
+  const validateEmail = (input) => {
     if (input.validity.valueMissing) return "This field is required";
-    if (input.name === "email" && input.validity.typeMismatch) return "This is not a valid email";
-    return "Invalid value";
+    if (input.validity.typeMismatch) return "This is not a valid email";
+    return "";
   };
 
-  const validateField = (e) => {
-    const { name } = e.target;
-    let msg = "";
-
-    if (!e.target.validity.valid) msg = getErrorMessage(e.target);
-
-    setErrors((prev) => ({ ...prev, [name]: msg }));
-  };
-
-  const handleChangeValidated = (e) => {
+  const handleEmailChange = (e) => {
     handleChange(e);
-    if (e.target.name === "email") validateField(e);
+    if (typeof onClearError === "function") onClearError();
+    setEmailError(validateEmail(e.target));
   };
 
-  const handleBlur = (e) => {
-    const { name } = e.target;
-    setTouched((prev) => ({ ...prev, [name]: true }));
-    if (name === "email") validateField(e);
+  const handlePasswordChange = (e) => {
+    handleChange(e);
+    if (typeof onClearError === "function") onClearError();
   };
 
-  const showError = (field) => Boolean(touched[field] && errors[field]);
+  const handleEmailBlur = (e) => {
+    setEmailTouched(true);
+    setEmailError(validateEmail(e.target));
+  };
 
-  const isSubmitDisabled = !values.email || !values.password || Object.values(errors).some(Boolean);
+  const isSubmitDisabled =
+    !values.email ||
+    !values.password ||
+    Boolean(emailError);
 
   const handleSubmit = (e) => {
     e.preventDefault();
-
-    handleLoginSubmit(values, () => {
-      setValues({ email: "", password: "" });
-    });
+    if (typeof handleLoginSubmit === "function") {
+      handleLoginSubmit(values);
+    }
   };
 
   return (
@@ -72,53 +72,58 @@ function LoginModal({ isOpen, onClose, handleLoginSubmit, onSwitch, hasError }) 
       buttonText="Log In"
       isOpen={isOpen}
       onClose={onClose}
-      onSubmit={handleSubmit}
-      footerLinkText="or Sign Up"
-      footerLinkOnClick={onSwitch}
+      handleSubmit={handleSubmit}
+      switchText="Sign Up"
+      onSwitch={onSwitchToRegister || onSwitch}
       isSubmitDisabled={isSubmitDisabled}
     >
       <label
         htmlFor="login-email"
-        className={`modal__label ${showError("email") ? "modal__label_error" : ""}`}
+        className={`modal__label ${
+          emailTouched && emailError ? "modal__label_error" : ""
+        }`}
       >
         Email
-        {showError("email") ? ` (${errors.email})` : ""}
+        {emailTouched && emailError ? ` (${emailError})` : ""}
         <input
           id="login-email"
           type="email"
           name="email"
           placeholder="Email"
-          className={`modal__input ${showError("email") ? "modal__input_error" : ""}`}
+          className={`modal__input ${
+            emailTouched && emailError ? "modal__input_error" : ""
+          }`}
           value={values.email}
-          onChange={handleChangeValidated}
-          onBlur={handleBlur}
+          onChange={handleEmailChange}
+          onBlur={handleEmailBlur}
           required
         />
       </label>
 
       <label
         htmlFor="login-password"
-        className={`modal__label ${hasError ? "modal__label_error" : ""}`}
+        className={`modal__label ${hasAuthError ? "modal__label_error" : ""}`}
       >
-        {hasError ? "Incorrect password" : "Password"}
+        {hasAuthError ? "Incorrect password" : "Password"}
         <input
           id="login-password"
           type="password"
           name="password"
           placeholder="Password"
-          className={`modal__input ${hasError ? "modal__input_error" : ""}`}
+          className={`modal__input ${hasAuthError ? "modal__input_error" : ""}`}
           value={values.password}
-          onChange={handleChangeValidated}
+          onChange={handlePasswordChange}
           required
         />
       </label>
 
-      {hasError && <p className="modal__error">Email or password incorrect</p>}
+      {hasAuthError && <p className="modal__error">{authError}</p>}
     </ModalWithForm>
   );
 }
 
 export default LoginModal;
+
 
 
 

@@ -9,6 +9,8 @@
   padding: 0 10px;
   visibility: hidden;
   opacity: 0;
+  pointer-events: none;
+  z-index: 1000;
   transition: visibility 0s linear 0.2s, opacity 0.2s linear;
   background-color: rgba(0, 0, 0, 0.5);
 }
@@ -16,6 +18,7 @@
 .modal_is-opened {
   visibility: visible;
   opacity: 1;
+  pointer-events: auto;
   transition-delay: 0s;
 }
 
@@ -41,6 +44,7 @@
 
 .modal__container_type_form {
   width: 496px;
+  max-width: calc(100vw - 40px);
   padding: 28px 32px 32px;
   background-color: #ffffff;
   border-radius: 20px;
@@ -58,6 +62,10 @@
   line-height: 1;
   cursor: pointer;
   color: rgba(0, 0, 0, 0.3);
+}
+
+.modal__close-btn:hover {
+  opacity: 0.8;
 }
 
 .modal__title {
@@ -183,14 +191,6 @@
   font-weight: 700;
   font-size: 16px;
   color: rgba(0, 0, 0, 1);
-}
-
-/* If you ever wrap radio rows in .modal__radio-group,
-   keep them stacked (not in a single row). */
-.modal__radio-group {
-  display: flex;
-  flex-direction: column;
-  gap: 12px;
 }
 
 .modal__radio-row {

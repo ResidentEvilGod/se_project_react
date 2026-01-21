@@ -1,4 +1,4 @@
-.modal {
+.preview-modal {
   font-family: "Cabinet Grotesk", sans-serif;
   font-weight: 700;
   align-items: center;
@@ -9,17 +9,20 @@
   padding: 0 10px;
   visibility: hidden;
   opacity: 0;
-  transition: visibility 0s linear 0.5s, opacity 0.5s linear;
+  pointer-events: none;
+  z-index: 1100;
+  transition: visibility 0s linear 0.2s, opacity 0.2s linear;
   background-color: rgba(0, 0, 0, 0.5);
 }
 
-.modal_is-opened {
+.preview-modal_is-opened {
   visibility: visible;
   opacity: 1;
+  pointer-events: auto;
   transition-delay: 0s;
 }
 
-.modal__container {
+.preview-modal__container {
   position: relative;
   max-width: 820px;
   width: 100%;
@@ -29,91 +32,62 @@
   overflow: hidden;
 }
 
-.modal__container_type_preview {
-  width: 498px;
-  max-width: calc(100vw - 40px);
-  background: #ffffff;
-  border-radius: 20px;
-  overflow: hidden;
-  position: relative;
-  display: flex;
-  flex-direction: column; /* KEY: stacked layout */
-}
-
-.modal__content {
-  display: grid;
-  grid-template-columns: 2fr 1fr;
-}
-
-.modal__image-wrapper {
-  position: relative;
-  overflow: hidden;
-}
-
-.modal__tag {
+.preview-modal__close-btn {
   position: absolute;
-  top: 16px;
-  left: 50%;
-  transform: translateX(-50%);
-  margin: 0;
-  padding: 4px 12px;
-  border-radius: 999px;
-  background-color: #ffffff;
-  font-size: 16px;
-  font-weight: 700;
-  color: rgba(0, 0, 0, 0.6);
+  top: 18px;
+  right: 18px;
+  border: none;
+  background: rgba(0, 0, 0, 0.35);
+  color: #fff;
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  font-size: 20px;
+  cursor: pointer;
+  z-index: 2;
 }
 
-.modal__image {
+.preview-modal__close-btn:hover {
+  opacity: 0.85;
+}
+
+.preview-modal__image {
   width: 100%;
   height: 498px;
   object-fit: cover;
   display: block;
 }
 
-.modal__info {
+.preview-modal__footer {
+  padding: 20px 32px 32px;
   display: flex;
-  flex-direction: column;
   justify-content: space-between;
-  padding: 32px;
-  background-color: #ffffff;
+  align-items: flex-start;
+  gap: 16px;
 }
 
-.modal__weather {
+.preview-modal__caption {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.preview-modal__title {
   margin: 0;
   font-size: 20px;
   font-weight: 700;
   color: rgba(0, 0, 0, 1);
 }
 
-.modal__close-btn {
-  position: absolute;
-  top: 24px;
-  right: 24px;
-  border: none;
-  background: transparent;
+.preview-modal__weather {
+  margin: 0;
   font-size: 20px;
-  cursor: pointer;
+  font-weight: 700;
+  color: rgba(0, 0, 0, 1);
 }
 
-.modal__close-btn_type_preview {
-  position: absolute;
-  top: 20px;
-  right: 20px;
+.preview-modal__delete-btn {
   border: none;
-  background: transparent;
-  font-size: 22px;
-  color: #ffffff;
-  cursor: pointer;
-  z-index: 2;
-}
-
-.modal__close-btn_type_preview:hover {
-  opacity: 0.85;
-}
-
-.modal__delete-btn {
-border: none;
   background: transparent;
   padding: 0;
   font: inherit;
@@ -122,11 +96,11 @@ border: none;
   cursor: pointer;
 }
 
-.modal__delete-btn:hover {
-    opacity: 0.8;
+.preview-modal__delete-btn:hover {
+  opacity: 0.8;
 }
 
-.modal__confirm {
+.preview-modal__confirm {
   padding: 48px 60px 40px;
   display: flex;
   flex-direction: column;
@@ -134,36 +108,37 @@ border: none;
   text-align: center;
 }
 
-.modal__confirm-title {
+.preview-modal__confirm-title {
   margin: 0 0 8px;
   font-size: 20px;
   font-weight: 700;
   color: rgba(0, 0, 0, 1);
 }
 
-.modal__confirm-subtitle {
+.preview-modal__confirm-subtitle {
   margin: 0 0 32px;
- font-size: 16px;
+  font-size: 16px;
   font-weight: 400;
   color: rgba(0, 0, 0, 1);
 }
 
-.modal__confirm-delete {
-   border: none;
+.preview-modal__confirm-delete {
+  border: none;
   background: transparent;
   padding: 0;
   font: inherit;
   font-weight: 700;
   color: #ff4d00;
   cursor: pointer;
+  margin-bottom: 24px;
 }
 
-.modal__confirm-delete:hover {
+.preview-modal__confirm-delete:hover {
   opacity: 0.8;
 }
 
-.modal__confirm-cancel {
-   border: none;
+.preview-modal__confirm-cancel {
+  border: none;
   background: transparent;
   padding: 0;
   font: inherit;
@@ -172,31 +147,6 @@ border: none;
   cursor: pointer;
 }
 
-.modal__confirm-cancel:hover {
-   opacity: 0.8;
-}
-
-.modal__footer {
-  padding: 20px 32px 32px;
-  display: flex;
-  justify-content: space-between;
-  align-items: flex-start;
-}
-
-.modal__caption {
-  display: flex;
-  flex-direction: column;
-  gap: 12px;
-}
-
-.modal__title {
-  margin: 0;
-  font-size: 20px;
-  font-weight: 700;
-}
-
-.modal__weather {
-  margin: 0;
-  font-size: 20px;
-  font-weight: 700;
+.preview-modal__confirm-cancel:hover {
+  opacity: 0.8;
 }
