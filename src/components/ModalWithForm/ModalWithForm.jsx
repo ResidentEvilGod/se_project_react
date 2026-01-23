@@ -47,10 +47,10 @@ function ModalWithForm({
       aria-modal="true"
       aria-hidden={!isOpen}
     >
-      <div className="modal__container modal__container_type_form">
+      <div className="modal__container_type_form">
         <button
           type="button"
-          className="modal__close-btn modal__close-btn_type_form"
+          className="modal__close-btn"
           onClick={onClose}
           aria-label="Close modal"
         >
@@ -91,4 +91,5 @@ function ModalWithForm({
 }
 
 export default ModalWithForm;
+
 
