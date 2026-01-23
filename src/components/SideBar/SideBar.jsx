@@ -46,7 +46,11 @@ function SideBar({ handleSignOut, handleOpenEditProfileModal }) {
           Change profile data
         </button>
 
-        <button type="button" className="sidebar__button" onClick={handleSignOut}>
+        <button
+          type="button"
+          className="sidebar__button"
+          onClick={handleSignOut}
+        >
           Log out
         </button>
       </div>
@@ -55,4 +59,5 @@ function SideBar({ handleSignOut, handleOpenEditProfileModal }) {
 }
 
 export default SideBar;
+
 

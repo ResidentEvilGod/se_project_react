@@ -237,21 +237,21 @@ function App() {
               }
             />
 
-            <Route
-              path="/profile"
-              element={
-                <ProtectedRoute isLoggedIn={isLoggedIn}>
-                  <Profile
-                    clothingItems={clothingItems}
-                    handleOpenAddGarmentModal={handleOpenAddGarmentModal}
-                    handleOpenItemModal={handleOpenItemModal}
-                    handleOpenEditProfileModal={handleOpenEditProfileModal}
-                    onCardLike={handleCardLike}
-                    handleSignOut={handleSignOut}
-                  />
-                </ProtectedRoute>
-              }
-            />
+        <Route
+  path="/profile"
+  element={
+    <ProtectedRoute isLoggedIn={isLoggedIn}>
+      <Profile
+        clothingItems={clothingItems}
+        handleOpenAddGarmentModal={handleOpenAddGarmentModal}
+        handleOpenItemModal={handleOpenItemModal}
+        handleOpenEditProfileModal={handleOpenEditProfileModal}
+        onCardLike={handleCardLike}
+        handleSignOut={handleSignOut}
+      />
+    </ProtectedRoute>
+  }
+/>
           </Routes>
 
           <Footer />
